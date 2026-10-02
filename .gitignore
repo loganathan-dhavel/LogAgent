@@ -1,4 +1,9 @@
+# Environment files
 .env
-./api/chroma_db/
-./api/*.db
+
+# Database files
+api/chroma_db/
+api/*.db
+
+# Logs
 *.log
