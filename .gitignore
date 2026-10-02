@@ -1,6 +1,3 @@
-# Environment files
-.env
-
 # Database files
 api/chroma_db/
 api/*.db

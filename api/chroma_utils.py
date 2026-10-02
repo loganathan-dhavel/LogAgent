@@ -5,9 +5,13 @@ from langchain_ollama.embeddings import OllamaEmbeddings
 from typing import List
 from langchain_core.documents import Document
 import os
+from dotenv import load_dotenv
 
+if not os.getenv('OLLAMA_API_BASE_URL'):
+    load_dotenv()
+    
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=150, length_function=len)
-embeddings_function = OllamaEmbeddings(model="nomic-embed-text")
+embeddings_function = OllamaEmbeddings(model="nomic-embed-text", base_url=os.getenv("OLLAMA_API_BASE_URL"))
 
 vectorstore = Chroma(persist_directory="./chroma_db", embedding_function=embeddings_function)
 

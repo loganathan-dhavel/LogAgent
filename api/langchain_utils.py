@@ -7,7 +7,11 @@ from typing import List
 from chroma_utils import vectorstore
 from langchain_core.documents import Document
 import os
+from dotenv import load_dotenv
 
+if not os.getenv('OLLAMA_API_BASE_URL'):
+    load_dotenv()
+    
 retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
 output_parser = StrOutputParser()
 
@@ -36,7 +40,7 @@ qa_prompt = ChatPromptTemplate.from_messages(
 )
 
 def get_rag_chain(model="mistral:7b"):
-    llm = ChatOllama(model=model)
+    llm = ChatOllama(model=model, base_url=os.getenv("OLLAMA_API_BASE_URL"))
     history_aware_retriever = create_history_aware_retriever(llm, retriever, contextualize_q_prompt)
     question_answer_chain = create_stuff_documents_chain(llm, qa_prompt)
     rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)    
