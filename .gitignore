@@ -1,0 +1,4 @@
+.env
+./api/chroma_db/
+./api/*.db
+*.log
