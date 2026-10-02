@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  logagent-backend-build:
+  logagent-backend-buildx:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -29,7 +29,7 @@ jobs:
           push: true
           tags: krishloga9318/logagent-backend:latest
 
-  logagent-ui-build:
+  logagent-ui-buildx:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
